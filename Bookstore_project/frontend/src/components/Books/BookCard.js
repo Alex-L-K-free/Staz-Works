@@ -1,31 +1,31 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 
-const BookCard = ({ book }) => {
+function BookCard({ book }) {
   return (
-    <Card sx={{ maxWidth: 345, m: 2 }}>
+    <Card sx={{ width: 200, height: 320 }}>
       <CardMedia
         component="img"
-        height="250"
-        image={book.image || '/placeholder.jpg'}
-        alt={book.title}
+        height="200"
+        image={book?.image || '/placeholder.jpg'}
+        alt={book?.title}
       />
       <CardContent>
-        <Typography gutterBottom variant="h6">
-          {book.title}
+        <Typography gutterBottom variant="h6" component="div" noWrap>
+          {book?.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Автор: {book.author}
+        <Typography variant="body2" color="text.secondary" noWrap>
+          {book?.author}
         </Typography>
         <Typography variant="h6" color="primary">
-          {book.price} руб.
+          {book?.price} ₽
         </Typography>
-        <Button variant="contained" color="primary">
-          Добавить в корзину
+        <Button variant="contained" size="small" fullWidth>
+          В корзину
         </Button>
       </CardContent>
     </Card>
   );
-};
+}
 
 export default BookCard; 

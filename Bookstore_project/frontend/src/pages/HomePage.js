@@ -1,74 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import BookGrid from '../components/Books/BookGrid';
+import React from 'react';
+import { Box, Container, Typography, Paper } from '@mui/material';
 import BookFilter from '../components/Books/BookFilter';
-import api from '../services/api';
+import BookList from '../components/Books/BookList';
 
-const HomePage = () => {
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchBooks = async (filters = {}) => {
-    try {
-      setLoading(true);
-      const params = new URLSearchParams();
-      
-      if (filters.priceRange) {
-        params.append('min_price', filters.priceRange[0]);
-        params.append('max_price', filters.priceRange[1]);
-      }
-      if (filters.genres?.length) {
-        params.append('genre', filters.genres.join(','));
-      }
-      if (filters.years?.length) {
-        params.append('year', filters.years.join(','));
-      }
-
-      const response = await api.getBooks(params);
-      setBooks(response.data);
-    } catch (err) {
-      setError('Ошибка при загрузке книг');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  const handleFilterChange = (filters) => {
-    fetchBooks(filters);
-  };
-
+function HomePage() {
   return (
-    <Box className="main-content">
-      <Box className="welcome-banner">
-        <Typography variant="h3" component="h1">
-          Добро пожаловать в Bookstore!
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Navbar */}
+      <Box sx={{ bgcolor: 'primary.main', p: 1 }}>
+        <Typography variant="h6" color="white">Книжный магазин</Typography>
+      </Box>
+
+      {/* Заголовок с фоновым изображением */}
+      <Box 
+        sx={{ 
+          bgcolor: 'background.paper',
+          p: 2,
+          backgroundImage: 'url("/path-to-your-image.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <Typography variant="h4" align="center">
+          Добро пожаловать в наш книжный магазин
         </Typography>
       </Box>
-      
-      <Container maxWidth="xl">
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={3}>
-            <BookFilter onFilterChange={handleFilterChange} />
-          </Grid>
-          <Grid item xs={12} md={9}>
-            {loading ? (
-              <Typography>Загрузка...</Typography>
-            ) : error ? (
-              <Typography color="error">{error}</Typography>
-            ) : (
-              <BookGrid books={books} />
-            )}
-          </Grid>
-        </Grid>
+
+      {/* Основной контент */}
+      <Container sx={{ flex: 1, display: 'flex', gap: 2, my: 2 }}>
+        {/* Панель фильтров */}
+        <Paper sx={{ width: 240, p: 2 }}>
+          <BookFilter />
+        </Paper>
+
+        {/* Окно для карточек книг */}
+        <Paper 
+          sx={{ 
+            flex: 1, 
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          <BookList />
+          {/* Горизонтальная прокрутка будет добавлена в BookList */}
+        </Paper>
       </Container>
+
+      {/* Footer */}
+      <Box sx={{ bgcolor: 'primary.main', p: 1, mt: 'auto' }}>
+        <Typography color="white" align="center">
+          © 2024 Книжный магазин
+        </Typography>
+      </Box>
     </Box>
   );
-};
+}
 
 export default HomePage;
