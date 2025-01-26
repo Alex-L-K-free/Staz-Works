@@ -6,97 +6,98 @@ import BookList from '../components/Books/BookList';
 function HomePage() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Адаптивный navbar */}
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: '100vh', // Фиксированная высота на весь экран
+      overflow: 'hidden' // Предотвращает скролл всей страницы
+    }}>
+      {/* Компактный navbar */}
       <Box sx={{ 
         bgcolor: 'primary.main', 
-        p: { xs: 1, sm: 2 },
-        position: 'sticky',
-        top: 0,
-        zIndex: 1100
+        py: 1, // Уменьшенный вертикальный padding
+        px: 2,
+        height: '48px', // Фиксированная высота
+        display: 'flex',
+        alignItems: 'center'
       }}>
         <Typography 
-          variant={isMobile ? "subtitle1" : "h6"} 
+          variant="h6" 
           color="white"
-          sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
+          sx={{ fontSize: '1.1rem' }}
         >
           Книжный магазин
         </Typography>
       </Box>
 
-      {/* Адаптивный заголовок */}
+      {/* Компактный заголовок */}
       <Box sx={{ 
         bgcolor: 'background.paper',
-        p: { xs: 2, sm: 3, md: 4 },
-        backgroundImage: 'url("/path-to-your-image.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: { xs: '150px', sm: '200px', md: '250px' },
+        py: 2, // Уменьшенный padding
+        px: 2,
+        height: '80px', // Фиксированная высота
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
         <Typography 
-          variant={isMobile ? "h5" : "h4"} 
+          variant="h4" 
           align="center"
-          sx={{
-            fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            padding: { xs: 1, sm: 2 },
-            borderRadius: 1
-          }}
+          sx={{ fontSize: '1.5rem' }}
         >
           Добро пожаловать в наш книжный магазин
         </Typography>
       </Box>
 
-      {/* Адаптивный контент */}
-      <Container 
-        sx={{ 
-          flex: 1, 
-          display: 'flex', 
-          flexDirection: { xs: 'column', md: 'row' },
-          gap: 2, 
-          my: 2,
-          px: { xs: 1, sm: 2, md: 3 }
-        }}
-      >
-        {/* Адаптивная панель фильтров */}
+      {/* Основной контент */}
+      <Box sx={{ 
+        flex: 1,
+        display: 'flex',
+        px: 2, // Отступы по бокам
+        gap: 2,
+        overflow: 'hidden' // Важно для скролла контента
+      }}>
+        {/* Панель фильтров - прижата к левому краю */}
         <Paper 
           sx={{ 
-            width: { xs: '100%', md: 240 },
-            p: { xs: 1, sm: 2 },
-            mb: { xs: 2, md: 0 }
+            width: '250px', // Фиксированная ширина
+            height: '100%',
+            overflow: 'auto',
+            p: 2,
+            flexShrink: 0 // Предотвращает сжатие
           }}
         >
           <BookFilter />
         </Paper>
 
-        {/* Адаптивный список книг */}
+        {/* Контейнер для книг - растягивается на оставшееся пространство */}
         <Paper 
           sx={{ 
-            flex: 1, 
-            p: { xs: 1, sm: 2 },
-            overflow: 'hidden'
+            flex: 1,
+            height: '100%',
+            overflow: 'auto',
+            p: 2
           }}
         >
           <BookList />
         </Paper>
-      </Container>
+      </Box>
 
-      {/* Адаптивный footer */}
+      {/* Компактный footer */}
       <Box sx={{ 
         bgcolor: 'primary.main', 
-        p: { xs: 1, sm: 2 }, 
-        mt: 'auto'
+        py: 1, // Уменьшенный padding
+        px: 2,
+        height: '40px', // Фиксированная высота
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}>
         <Typography 
           color="white" 
-          align="center"
-          sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+          variant="body2"
         >
           © 2024 Книжный магазин
         </Typography>
