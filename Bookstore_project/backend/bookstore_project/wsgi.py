@@ -1,10 +1,9 @@
 """
-WSGI config for bookstore_project project.
+Путь: backend/bookstore_project/wsgi.py
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
+Назначение: Конфигурация WSGI.
+Точка входа для WSGI-серверов (например, Gunicorn)
+при развертывании приложения.
 """
 
 import os

@@ -1,3 +1,11 @@
+/**
+ * Путь: frontend/src/components/Books/BookList.js
+ * 
+ * Назначение: Компонент для отображения списка книг.
+ * Отвечает за организацию и отображение карточек книг в виде сетки,
+ * обеспечивает адаптивную верстку и прокрутку списка книг.
+ */
+
 import React from 'react';
 import { Grid, Box, useTheme, useMediaQuery } from '@mui/material';
 import BookCard from './BookCard';

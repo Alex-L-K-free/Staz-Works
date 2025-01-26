@@ -1,3 +1,11 @@
+/**
+ * Путь: frontend/src/components/Auth/LoginForm.js
+ * 
+ * Назначение: Компонент формы входа.
+ * Обрабатывает аутентификацию пользователя,
+ * включает валидацию полей и обработку ошибок.
+ */
+
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import api from '../../services/api';

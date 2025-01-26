@@ -1,10 +1,9 @@
 """
-ASGI config for bookstore_project project.
+Путь: backend/bookstore_project/asgi.py
 
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
+Назначение: Конфигурация ASGI.
+Точка входа для ASGI-серверов при развертывании
+приложения с поддержкой асинхронных операций.
 """
 
 import os

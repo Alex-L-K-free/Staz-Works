@@ -1,3 +1,12 @@
+/**
+ * Путь: frontend/src/pages/HomePage.js
+ * 
+ * Назначение: Главная страница приложения.
+ * Компонент отвечает за общую структуру и layout главной страницы,
+ * включая навигационную панель, заголовок, секцию с фильтрами и
+ * списком книг, а также подвал страницы.
+ */
+
 import React from 'react';
 import { Box, Container, Typography, Paper, useTheme, useMediaQuery } from '@mui/material';
 import BookFilter from '../components/Books/BookFilter';

@@ -1,3 +1,12 @@
+/**
+ * Путь: frontend/src/App.js
+ * 
+ * Назначение: Корневой компонент приложения.
+ * Отвечает за основную маршрутизацию, подключение глобальных стилей
+ * и провайдеров (MUI Theme, Redux store и др.). Является точкой входа
+ * для всех остальных компонентов приложения.
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';

@@ -1,4 +1,12 @@
-#/backend/books/views.py
+"""
+Путь: backend/books/views.py
+
+Назначение: Представления (views) приложения books.
+Содержит логику обработки HTTP-запросов,
+включая получение списка книг, детальной информации,
+фильтрацию и поиск.
+"""
+
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, permission_classes

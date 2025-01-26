@@ -1,4 +1,11 @@
-#/backend/books/models.py
+# """
+# Путь: backend/books/models.py
+
+# Назначение: Модели данных приложения books.
+# Определяет структуру базы данных для книг,
+# их категорий, авторов и связанных сущностей.
+# """
+
 from django.db import models
 from django.contrib.auth import get_user_model
 

@@ -1,3 +1,11 @@
+/**
+ * Путь: frontend/src/index.js
+ * 
+ * Назначение: Точка входа в React приложение.
+ * Отвечает за рендеринг корневого компонента App,
+ * подключение React.StrictMode и других корневых провайдеров.
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

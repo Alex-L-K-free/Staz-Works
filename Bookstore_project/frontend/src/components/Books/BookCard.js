@@ -1,3 +1,12 @@
+/**
+ * Путь: frontend/src/components/Books/BookCard.js
+ * 
+ * Назначение: Компонент карточки отдельной книги.
+ * Отображает информацию о книге включая изображение, название,
+ * автора, цену и кнопку добавления в корзину. Обеспечивает
+ * адаптивное отображение на разных устройствах.
+ */
+
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 

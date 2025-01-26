@@ -1,3 +1,11 @@
+/**
+ * Путь: frontend/src/components/Books/BookGrid.js
+ * 
+ * Назначение: Компонент сетки книг.
+ * Отображает книги в виде адаптивной сетки,
+ * автоматически подстраивающейся под размер экрана.
+ */
+
 import React from 'react';
 import { Grid } from '@mui/material';
 import BookCard from './BookCard';

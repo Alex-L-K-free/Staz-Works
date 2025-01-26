@@ -1,4 +1,11 @@
-#/backend/books/urls.py
+"""
+Путь: backend/books/urls.py
+
+Назначение: URL-маршруты приложения books.
+Определяет все доступные эндпоинты API для
+работы с книгами и связанными сущностями.
+"""
+
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import views
