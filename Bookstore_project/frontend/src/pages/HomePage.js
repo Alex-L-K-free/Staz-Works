@@ -1,55 +1,103 @@
 import React from 'react';
-import { Box, Container, Typography, Paper } from '@mui/material';
+import { Box, Container, Typography, Paper, useTheme, useMediaQuery } from '@mui/material';
 import BookFilter from '../components/Books/BookFilter';
 import BookList from '../components/Books/BookList';
 
 function HomePage() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Navbar */}
-      <Box sx={{ bgcolor: 'primary.main', p: 1 }}>
-        <Typography variant="h6" color="white">Книжный магазин</Typography>
+      {/* Адаптивный navbar */}
+      <Box sx={{ 
+        bgcolor: 'primary.main', 
+        p: { xs: 1, sm: 2 },
+        position: 'sticky',
+        top: 0,
+        zIndex: 1100
+      }}>
+        <Typography 
+          variant={isMobile ? "subtitle1" : "h6"} 
+          color="white"
+          sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
+        >
+          Книжный магазин
+        </Typography>
       </Box>
 
-      {/* Заголовок с фоновым изображением */}
-      <Box 
-        sx={{ 
-          bgcolor: 'background.paper',
-          p: 2,
-          backgroundImage: 'url("/path-to-your-image.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <Typography variant="h4" align="center">
+      {/* Адаптивный заголовок */}
+      <Box sx={{ 
+        bgcolor: 'background.paper',
+        p: { xs: 2, sm: 3, md: 4 },
+        backgroundImage: 'url("/path-to-your-image.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: { xs: '150px', sm: '200px', md: '250px' },
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Typography 
+          variant={isMobile ? "h5" : "h4"} 
+          align="center"
+          sx={{
+            fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            padding: { xs: 1, sm: 2 },
+            borderRadius: 1
+          }}
+        >
           Добро пожаловать в наш книжный магазин
         </Typography>
       </Box>
 
-      {/* Основной контент */}
-      <Container sx={{ flex: 1, display: 'flex', gap: 2, my: 2 }}>
-        {/* Панель фильтров */}
-        <Paper sx={{ width: 240, p: 2 }}>
+      {/* Адаптивный контент */}
+      <Container 
+        sx={{ 
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: 2, 
+          my: 2,
+          px: { xs: 1, sm: 2, md: 3 }
+        }}
+      >
+        {/* Адаптивная панель фильтров */}
+        <Paper 
+          sx={{ 
+            width: { xs: '100%', md: 240 },
+            p: { xs: 1, sm: 2 },
+            mb: { xs: 2, md: 0 }
+          }}
+        >
           <BookFilter />
         </Paper>
 
-        {/* Окно для карточек книг */}
+        {/* Адаптивный список книг */}
         <Paper 
           sx={{ 
             flex: 1, 
-            p: 2,
-            display: 'flex',
-            flexDirection: 'column'
+            p: { xs: 1, sm: 2 },
+            overflow: 'hidden'
           }}
         >
           <BookList />
-          {/* Горизонтальная прокрутка будет добавлена в BookList */}
         </Paper>
       </Container>
 
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'primary.main', p: 1, mt: 'auto' }}>
-        <Typography color="white" align="center">
+      {/* Адаптивный footer */}
+      <Box sx={{ 
+        bgcolor: 'primary.main', 
+        p: { xs: 1, sm: 2 }, 
+        mt: 'auto'
+      }}>
+        <Typography 
+          color="white" 
+          align="center"
+          sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+        >
           © 2024 Книжный магазин
         </Typography>
       </Box>
