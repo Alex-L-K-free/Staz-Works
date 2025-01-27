@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography, Alert } from '@mui/material';
-import axios from 'axios';
+import { authAPI } from '../../services/api';
 
 function UserProfile() {
   const [userData, setUserData] = useState({
@@ -18,28 +18,25 @@ function UserProfile() {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get('/api/profile/', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-        }
-      });
-      setUserData(response.data);
+      const data = await authAPI.getProfile();
+      setUserData(data);
     } catch (err) {
-      setError('Ошибка при загрузке данных');
+      console.error('Error fetching profile:', err);
+      setError('Ошибка при загрузке данных профиля');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+
     try {
-      await axios.put('/api/profile/', userData, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-        }
-      });
-      setSuccess('Профиль обновлен');
+      await authAPI.updateProfile(userData);
+      setSuccess('Профиль успешно обновлен');
     } catch (err) {
-      setError('Ошибка при обновлении профиля');
+      console.error('Error updating profile:', err);
+      setError('Ошибка при сохранении данных');
     }
   };
 
@@ -48,12 +45,14 @@ function UserProfile() {
       <Typography variant="h5" gutterBottom>Личный кабинет</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
+      
       <TextField
         fullWidth
         label="Имя пользователя"
         margin="normal"
         value={userData.username}
         onChange={(e) => setUserData({...userData, username: e.target.value})}
+        disabled // Username обычно нельзя менять
       />
       <TextField
         fullWidth
@@ -67,7 +66,7 @@ function UserProfile() {
         fullWidth
         label="Телефон"
         margin="normal"
-        value={userData.phone}
+        value={userData.phone || ''}
         onChange={(e) => setUserData({...userData, phone: e.target.value})}
       />
       <TextField
@@ -76,7 +75,7 @@ function UserProfile() {
         multiline
         rows={3}
         margin="normal"
-        value={userData.address}
+        value={userData.address || ''}
         onChange={(e) => setUserData({...userData, address: e.target.value})}
       />
       <Button

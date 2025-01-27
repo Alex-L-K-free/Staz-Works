@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Alert } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { authAPI } from '../../services/api';
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -15,36 +15,23 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Очищаем предыдущие ошибки
-
-    // Проверка паролей
-    if (formData.password !== formData.password2) {
-      setError('Пароли не совпадают');
-      return;
-    }
+    setError('');
 
     try {
-      const response = await axios.post('/api/register/', formData);
-      if (response.data.access) {
-        localStorage.setItem('access_token', response.data.access);
-        localStorage.setItem('refresh_token', response.data.refresh);
+      // Сначала регистрируем пользователя
+      await authAPI.register(formData);
+      // После успешной регистрации выполняем вход
+      const loginData = await authAPI.login({
+        username: formData.username,
+        password: formData.password
+      });
+      
+      if (loginData.access) {
         navigate('/');
       }
     } catch (err) {
-      if (err.response && err.response.data) {
-        // Обработка различных ошибок от сервера
-        if (err.response.data.username) {
-          setError('Пользователь с таким именем уже существует');
-        } else if (err.response.data.email) {
-          setError('Пользователь с таким email уже существует');
-        } else if (err.response.data.error) {
-          setError(err.response.data.error);
-        } else {
-          setError('Произошла ошибка при регистрации');
-        }
-      } else {
-        setError('Ошибка сервера. Попробуйте позже');
-      }
+      console.error('Registration error:', err.response?.data);
+      setError(err.response?.data?.detail || 'Ошибка при регистрации');
     }
   };
 

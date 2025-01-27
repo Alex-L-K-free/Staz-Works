@@ -8,8 +8,8 @@
 
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Alert } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { authAPI } from '../../services/api';
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -21,12 +21,15 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
     try {
-      const response = await axios.post('/api/token/', formData);
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      navigate('/');
+      const data = await authAPI.login(formData);
+      if (data.access) {
+        navigate('/');
+      }
     } catch (err) {
+      console.error('Login error:', err.response?.data);
       setError('Неверное имя пользователя или пароль');
     }
   };
@@ -37,6 +40,7 @@ function LoginForm() {
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <TextField
         fullWidth
+        required
         label="Имя пользователя"
         margin="normal"
         value={formData.username}
@@ -44,6 +48,7 @@ function LoginForm() {
       />
       <TextField
         fullWidth
+        required
         label="Пароль"
         type="password"
         margin="normal"
