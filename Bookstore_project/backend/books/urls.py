@@ -9,6 +9,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import views
+from .views import BookListView
 
 # Создаем роутер
 router = DefaultRouter()
@@ -26,4 +27,6 @@ urlpatterns = [
     path('auth/register/', views.register_user, name='register'),
     path('auth/login/', views.login_user, name='login'),
     path('auth/logout/', views.logout_user, name='logout'),
+
+    path('api/books/', BookListView.as_view(), name='book-list'),
 ] 

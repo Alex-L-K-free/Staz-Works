@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['id', 'title', 'author', 'description', 'price', 'image']
+        fields = ['id', 'title', 'author', 'year', 'price', 'image', 'type', 'genre', 'description']
 
 class CartItemSerializer(serializers.ModelSerializer):
     book = BookSerializer(read_only=True)

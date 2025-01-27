@@ -18,6 +18,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Book, Cart, CartItem, Order
 from .serializers import BookSerializer, UserSerializer, CartSerializer, CartItemSerializer, OrderSerializer
 from rest_framework.decorators import action
+from rest_framework import generics
 
 # Create your views here.
 
@@ -126,3 +127,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
