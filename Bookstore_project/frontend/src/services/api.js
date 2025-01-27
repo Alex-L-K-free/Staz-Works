@@ -51,6 +51,18 @@ const apiFunctions = {
         api.delete(`/cart/items/${itemId}/`),
 };
 
+export const booksAPI = {
+  getBooks: async () => {
+    try {
+      const response = await api.get('/books/');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching books:', error);
+      throw error;
+    }
+  },
+};
+
 export const authAPI = {
   register: async (userData) => {
     const response = await api.post('/users/register/', userData);

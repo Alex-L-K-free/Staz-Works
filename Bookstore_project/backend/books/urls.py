@@ -28,5 +28,5 @@ urlpatterns = [
     path('auth/login/', views.login_user, name='login'),
     path('auth/logout/', views.logout_user, name='logout'),
 
-    path('api/books/', BookListView.as_view(), name='book-list'),
+    path('books/', BookListView.as_view(), name='book-list'),
 ] 

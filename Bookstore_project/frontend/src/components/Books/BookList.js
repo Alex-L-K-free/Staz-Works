@@ -9,7 +9,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import BookCard from './BookCard';
-import axios from 'axios';
+import api from '../../services/api';
 
 function BookList() {
   const [books, setBooks] = useState([]);
@@ -18,7 +18,7 @@ function BookList() {
     // Получаем данные с бэкенда при монтировании компонента
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('/api/books/');
+        const response = await api.get('/books/');
         setBooks(response.data);
       } catch (error) {
         console.error('Ошибка при получении данных:', error);

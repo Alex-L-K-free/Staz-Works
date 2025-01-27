@@ -10,7 +10,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.http import HttpResponse
 from django.db.models import Q
@@ -131,3 +131,4 @@ class OrderViewSet(viewsets.ModelViewSet):
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [AllowAny]  # Разрешаем доступ всем пользователям
