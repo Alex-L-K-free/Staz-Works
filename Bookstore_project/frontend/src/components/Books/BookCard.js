@@ -23,29 +23,36 @@ function BookCard({ book = {} }) {
 
   return (
     <Card sx={{ 
-      maxWidth: 300,
       height: '100%',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      '& .MuiCardContent-root': {
+        p: 1.5
+      }
     }}>
       <CardMedia
         component="img"
-        height="200"
+        height="160"
         image={book.image || 'https://via.placeholder.com/200x300?text=No+Image'}
         alt={book.title || 'Book cover'}
         sx={{ objectFit: 'contain' }}
       />
-      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Typography gutterBottom variant="h6" component="div" noWrap>
+      <CardContent sx={{ 
+        flexGrow: 1, 
+        display: 'flex', 
+        flexDirection: 'column',
+        p: 1.5
+      }}>
+        <Typography variant="subtitle1" component="div" noWrap>
           {book.title || 'Название отсутствует'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" noWrap>
           {book.author || 'Автор не указан'}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {book.year ? `${book.year} г.` : 'Год не указан'}
         </Typography>
-        <Box sx={{ mt: 'auto', pt: 2 }}>
+        <Box sx={{ mt: 'auto', pt: 1 }}>
           <Typography variant="h6" color="primary" gutterBottom>
             {book.price ? `${book.price} ₽` : 'Цена не указана'}
           </Typography>
@@ -53,6 +60,7 @@ function BookCard({ book = {} }) {
             variant="contained"
             startIcon={<AddShoppingCart />}
             fullWidth
+            size="small"
           >
             В корзину
           </Button>

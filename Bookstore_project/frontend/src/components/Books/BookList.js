@@ -29,9 +29,9 @@ function BookList() {
   }, []);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       {books && books.map((book) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={book.id}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={book.id}>
           <BookCard book={book} />
         </Grid>
       ))}
