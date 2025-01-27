@@ -13,6 +13,9 @@ import { Box, CssBaseline } from '@mui/material';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import HomePage from './pages/HomePage';
+import LoginForm from './components/Auth/LoginForm';
+import RegisterForm from './components/Auth/RegisterForm';
+import UserProfile from './components/Profile/UserProfile';
 import './App.css';
 
 function App() {
@@ -28,6 +31,9 @@ function App() {
         <Box sx={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </Box>
         <Footer />

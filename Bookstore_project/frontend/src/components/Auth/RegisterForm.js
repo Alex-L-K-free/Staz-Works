@@ -1,20 +1,14 @@
-/**
- * Путь: frontend/src/components/Auth/LoginForm.js
- * 
- * Назначение: Компонент формы входа.
- * Обрабатывает аутентификацию пользователя,
- * включает валидацию полей и обработку ошибок.
- */
-
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Alert } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function LoginForm() {
+function RegisterForm() {
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    email: '',
+    password: '',
+    password2: ''
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -22,18 +16,16 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/token/', formData);
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      navigate('/');
+      await axios.post('/api/register/', formData);
+      navigate('/login');
     } catch (err) {
-      setError('Неверное имя пользователя или пароль');
+      setError('Ошибка при регистрации');
     }
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
-      <Typography variant="h5" gutterBottom>Вход</Typography>
+      <Typography variant="h5" gutterBottom>Регистрация</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <TextField
         fullWidth
@@ -44,11 +36,27 @@ function LoginForm() {
       />
       <TextField
         fullWidth
+        label="Email"
+        type="email"
+        margin="normal"
+        value={formData.email}
+        onChange={(e) => setFormData({...formData, email: e.target.value})}
+      />
+      <TextField
+        fullWidth
         label="Пароль"
         type="password"
         margin="normal"
         value={formData.password}
         onChange={(e) => setFormData({...formData, password: e.target.value})}
+      />
+      <TextField
+        fullWidth
+        label="Подтверждение пароля"
+        type="password"
+        margin="normal"
+        value={formData.password2}
+        onChange={(e) => setFormData({...formData, password2: e.target.value})}
       />
       <Button
         type="submit"
@@ -56,10 +64,10 @@ function LoginForm() {
         fullWidth
         sx={{ mt: 2 }}
       >
-        Войти
+        Зарегистрироваться
       </Button>
     </Box>
   );
 }
 
-export default LoginForm; 
+export default RegisterForm; 
