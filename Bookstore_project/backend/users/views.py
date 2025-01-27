@@ -1,12 +1,13 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from .serializers import UserSerializer, UserRegistrationSerializer
 from .models import User
 
 class UserRegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (AllowAny,)
     serializer_class = UserRegistrationSerializer
 
     def post(self, request, *args, **kwargs):
@@ -28,8 +29,14 @@ class UserRegistrationView(generics.CreateAPIView):
             )
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-        return self.request.user 
+        return self.request.user
+
+# Добавляем новое представление для списка пользователей
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminUser,)  # Только для админов 
