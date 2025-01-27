@@ -140,7 +140,8 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Настройка пользовательской модели
-AUTH_USER_MODEL = 'auth.User'
+#AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'users.User'
 
 def ready():
     from django.contrib.auth import get_user_model

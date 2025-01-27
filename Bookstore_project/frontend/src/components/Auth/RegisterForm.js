@@ -15,11 +15,36 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Очищаем предыдущие ошибки
+
+    // Проверка паролей
+    if (formData.password !== formData.password2) {
+      setError('Пароли не совпадают');
+      return;
+    }
+
     try {
-      await axios.post('/api/register/', formData);
-      navigate('/login');
+      const response = await axios.post('/api/register/', formData);
+      if (response.data.access) {
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+        navigate('/');
+      }
     } catch (err) {
-      setError('Ошибка при регистрации');
+      if (err.response && err.response.data) {
+        // Обработка различных ошибок от сервера
+        if (err.response.data.username) {
+          setError('Пользователь с таким именем уже существует');
+        } else if (err.response.data.email) {
+          setError('Пользователь с таким email уже существует');
+        } else if (err.response.data.error) {
+          setError(err.response.data.error);
+        } else {
+          setError('Произошла ошибка при регистрации');
+        }
+      } else {
+        setError('Ошибка сервера. Попробуйте позже');
+      }
     }
   };
 
@@ -29,6 +54,7 @@ function RegisterForm() {
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <TextField
         fullWidth
+        required
         label="Имя пользователя"
         margin="normal"
         value={formData.username}
@@ -36,6 +62,7 @@ function RegisterForm() {
       />
       <TextField
         fullWidth
+        required
         label="Email"
         type="email"
         margin="normal"
@@ -44,6 +71,7 @@ function RegisterForm() {
       />
       <TextField
         fullWidth
+        required
         label="Пароль"
         type="password"
         margin="normal"
@@ -52,6 +80,7 @@ function RegisterForm() {
       />
       <TextField
         fullWidth
+        required
         label="Подтверждение пароля"
         type="password"
         margin="normal"

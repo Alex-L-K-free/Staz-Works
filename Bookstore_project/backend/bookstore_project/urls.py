@@ -13,5 +13,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),  # Главная страница
-    path('api/', include('books.urls')),  # API endpoints
+    path('api/', include('users.urls')),  # Добавьте этот путь
+    path('api/', include('books.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
