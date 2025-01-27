@@ -45,6 +45,7 @@ function LoginForm() {
         margin="normal"
         value={formData.username}
         onChange={(e) => setFormData({...formData, username: e.target.value})}
+        autoComplete="off"
       />
       <TextField
         fullWidth
@@ -54,6 +55,7 @@ function LoginForm() {
         margin="normal"
         value={formData.password}
         onChange={(e) => setFormData({...formData, password: e.target.value})}
+        autoComplete="new-password"
       />
       <Button
         type="submit"

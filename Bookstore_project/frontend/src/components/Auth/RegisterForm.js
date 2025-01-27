@@ -18,9 +18,7 @@ function RegisterForm() {
     setError('');
 
     try {
-      // Сначала регистрируем пользователя
       await authAPI.register(formData);
-      // После успешной регистрации выполняем вход
       const loginData = await authAPI.login({
         username: formData.username,
         password: formData.password
@@ -30,7 +28,6 @@ function RegisterForm() {
         navigate('/');
       }
     } catch (err) {
-      console.error('Registration error:', err.response?.data);
       setError(err.response?.data?.detail || 'Ошибка при регистрации');
     }
   };
@@ -46,15 +43,16 @@ function RegisterForm() {
         margin="normal"
         value={formData.username}
         onChange={(e) => setFormData({...formData, username: e.target.value})}
+        autoComplete="off"
       />
       <TextField
         fullWidth
-        required
         label="Email"
         type="email"
         margin="normal"
         value={formData.email}
         onChange={(e) => setFormData({...formData, email: e.target.value})}
+        autoComplete="off"
       />
       <TextField
         fullWidth
@@ -64,6 +62,7 @@ function RegisterForm() {
         margin="normal"
         value={formData.password}
         onChange={(e) => setFormData({...formData, password: e.target.value})}
+        autoComplete="new-password"
       />
       <TextField
         fullWidth
@@ -73,6 +72,7 @@ function RegisterForm() {
         margin="normal"
         value={formData.password2}
         onChange={(e) => setFormData({...formData, password2: e.target.value})}
+        autoComplete="new-password"
       />
       <Button
         type="submit"
