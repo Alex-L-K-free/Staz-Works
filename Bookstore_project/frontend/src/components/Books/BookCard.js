@@ -8,70 +8,55 @@
  */
 
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Box
+} from '@mui/material';
+import { AddShoppingCart } from '@mui/icons-material';
 
-function BookCard({ book }) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+function BookCard({ book = {} }) {
+  if (!book) return null;
 
   return (
     <Card sx={{ 
-      width: { xs: 160, sm: 200 },
-      height: { xs: 280, sm: 320 },
+      maxWidth: 300,
+      height: '100%',
       display: 'flex',
       flexDirection: 'column'
     }}>
       <CardMedia
         component="img"
-        sx={{
-          height: { xs: 160, sm: 200 },
-          objectFit: 'cover'
-        }}
-        image={book?.image || '/placeholder.jpg'}
-        alt={book?.title}
+        height="200"
+        image={book.image || 'https://via.placeholder.com/200x300?text=No+Image'}
+        alt={book.title || 'Book cover'}
+        sx={{ objectFit: 'contain' }}
       />
-      <CardContent sx={{ 
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        p: { xs: 1, sm: 2 }
-      }}>
-        <Typography 
-          gutterBottom 
-          variant={isMobile ? "subtitle1" : "h6"} 
-          component="div" 
-          noWrap
-          sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
-        >
-          {book?.title}
+      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <Typography gutterBottom variant="h6" component="div" noWrap>
+          {book.title || 'Название отсутствует'}
         </Typography>
-        <Typography 
-          variant="body2" 
-          color="text.secondary" 
-          noWrap
-          sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
-        >
-          {book?.author}
+        <Typography variant="body2" color="text.secondary">
+          {book.author || 'Автор не указан'}
         </Typography>
-        <Typography 
-          variant="h6" 
-          color="primary"
-          sx={{ 
-            mt: 'auto',
-            mb: 1,
-            fontSize: { xs: '1rem', sm: '1.25rem' }
-          }}
-        >
-          {book?.price} ₽
+        <Typography variant="body2" color="text.secondary">
+          {book.year ? `${book.year} г.` : 'Год не указан'}
         </Typography>
-        <Button 
-          variant="contained" 
-          size={isMobile ? "small" : "medium"} 
-          fullWidth
-          sx={{ mt: 'auto' }}
-        >
-          В корзину
-        </Button>
+        <Box sx={{ mt: 'auto', pt: 2 }}>
+          <Typography variant="h6" color="primary" gutterBottom>
+            {book.price ? `${book.price} ₽` : 'Цена не указана'}
+          </Typography>
+          <Button
+            variant="contained"
+            startIcon={<AddShoppingCart />}
+            fullWidth
+          >
+            В корзину
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );

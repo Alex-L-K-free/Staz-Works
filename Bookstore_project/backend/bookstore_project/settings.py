@@ -149,3 +149,6 @@ def ready():
     Group._meta.verbose_name = 'Группа'
     Group._meta.verbose_name_plural = 'Группы'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

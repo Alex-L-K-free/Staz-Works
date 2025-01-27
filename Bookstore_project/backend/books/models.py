@@ -14,13 +14,29 @@ User = get_user_model()
 # Create your models here.
 
 class Book(models.Model):
+    TYPE_CHOICES = [
+        ('hardcover', 'Твердый переплет'),
+        ('paperback', 'Мягкий переплет'),
+        ('ebook', 'Электронная книга'),
+    ]
+
+    GENRE_CHOICES = [
+        ('fiction', 'Художественная литература'),
+        ('non-fiction', 'Нехудожественная литература'),
+        ('science', 'Научная литература'),
+        ('fantasy', 'Фэнтези'),
+        ('detective', 'Детектив'),
+        ('romance', 'Роман'),
+    ]
+
+    type = models.CharField('Тип книги', max_length=20, choices=TYPE_CHOICES, default='hardcover')
+    genre = models.CharField('Жанр', max_length=20, choices=GENRE_CHOICES, default='fiction')
     title = models.CharField('Название', max_length=200)
     author = models.CharField('Автор', max_length=200)
-    description = models.TextField('Описание')
-    price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
-    image = models.ImageField('Обложка', upload_to='books/', null=True, blank=True)
-    genre = models.CharField('Жанр', max_length=100)
     year = models.IntegerField('Год издания')
+    price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
+    description = models.TextField('Описание')
+    image = models.ImageField('Изображение', upload_to='books/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

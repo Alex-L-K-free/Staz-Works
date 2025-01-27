@@ -15,6 +15,18 @@ function BookList() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
+  // Тестовые данные для отображения
+  const books = [
+    {
+      id: 1,
+      title: "Тестовая книга",
+      author: "Автор Книги",
+      year: 2024,
+      price: 999,
+      image: "https://via.placeholder.com/200x300?text=Book+1"
+    }
+  ];
+
   return (
     <Box sx={{ 
       overflowX: 'auto',
@@ -37,11 +49,11 @@ function BookList() {
           flexWrap: { xs: 'nowrap', sm: 'wrap' }
         }}
       >
-        {/* Динамическая ширина карточек */}
-        <Grid item xs={isMobile ? 'auto' : 12} sm={6} md={4} lg={3}>
-          <BookCard />
-        </Grid>
-        {/* Добавьте больше карточек */}
+        {books && books.map((book) => (
+          <Grid item xs={isMobile ? 'auto' : 12} sm={6} md={4} lg={3} key={book.id}>
+            <BookCard book={book} />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
