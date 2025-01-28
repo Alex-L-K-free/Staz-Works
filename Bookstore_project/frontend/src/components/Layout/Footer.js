@@ -9,14 +9,18 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-const Footer = () => {
+function Footer() {
   return (
-    <Box component="footer" sx={{ p: 2, mt: 'auto', backgroundColor: '#f5f5f5' }}>
-      <Typography variant="body2" color="text.secondary" align="center">
-        © 2025 Bookstore!
+    <Box sx={{ 
+      py: 2,
+      textAlign: 'center',
+      borderTop: '1px solid rgba(0, 0, 0, 0.12)'
+    }}>
+      <Typography variant="body2" color="text.secondary">
+        © {new Date().getFullYear()} Bookstore!
       </Typography>
     </Box>
   );
-};
+}
 
 export default Footer; 

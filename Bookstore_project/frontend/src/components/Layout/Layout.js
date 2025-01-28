@@ -7,4 +7,27 @@
  */
 
 import React from 'react';
-// ... остальной код ... 
+import { Box } from '@mui/material';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
+function Layout({ children }) {
+  return (
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column',
+      minHeight: '100vh' 
+    }}>
+      <Navbar />
+      <Box sx={{ 
+        flex: 1,
+        padding: 2
+      }}>
+        {children}
+      </Box>
+      <Footer />
+    </Box>
+  );
+}
+
+export default Layout; 

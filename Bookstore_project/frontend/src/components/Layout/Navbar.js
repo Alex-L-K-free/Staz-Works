@@ -24,25 +24,49 @@ function Navbar() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}>
+        <Typography 
+          variant="h6" 
+          component={Link} 
+          to="/" 
+          sx={{ 
+            flexGrow: 1, 
+            textDecoration: 'none', 
+            color: 'inherit' 
+          }}
+        >
           Книжный магазин
         </Typography>
         <Box>
           {isAuthenticated ? (
             <>
-              <Button color="inherit" component={Link} to="/profile">
+              <Button 
+                color="inherit" 
+                component={Link} 
+                to="/profile"
+              >
                 Профиль
               </Button>
-              <Button color="inherit" onClick={handleLogout}>
+              <Button 
+                color="inherit" 
+                onClick={handleLogout}
+              >
                 Выйти
               </Button>
             </>
           ) : (
             <>
-              <Button color="inherit" component={Link} to="/login">
+              <Button 
+                color="inherit" 
+                component={Link} 
+                to="/login"
+              >
                 Войти
               </Button>
-              <Button color="inherit" component={Link} to="/register">
+              <Button 
+                color="inherit" 
+                component={Link} 
+                to="/register"
+              >
                 Регистрация
               </Button>
             </>
