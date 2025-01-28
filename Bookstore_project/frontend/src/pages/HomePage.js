@@ -11,6 +11,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import BookList from '../components/Books/BookList';
 import BookFilter from '../components/Books/BookFilter';
+import WelcomeHeader from '../components/Layout/WelcomeHeader';
 
 function HomePage() {
   const handleFilterChange = (filters) => {
@@ -19,17 +20,20 @@ function HomePage() {
   };
 
   return (
-    <Box sx={{ 
-      display: 'flex',
-      gap: 2
-    }}>
-      <Box sx={{ width: 240 }}>
-        <BookFilter onFilterChange={handleFilterChange} />
+    <>
+      <WelcomeHeader />
+      <Box sx={{ 
+        display: 'flex',
+        gap: 2
+      }}>
+        <Box sx={{ width: 240 }}>
+          <BookFilter onFilterChange={handleFilterChange} />
+        </Box>
+        <Box sx={{ flex: 1 }}>
+          <BookList />
+        </Box>
       </Box>
-      <Box sx={{ flex: 1 }}>
-        <BookList />
-      </Box>
-    </Box>
+    </>
   );
 }
 
