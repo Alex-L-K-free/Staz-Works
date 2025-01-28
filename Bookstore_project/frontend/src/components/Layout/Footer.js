@@ -11,7 +11,7 @@ import { Box, Typography } from '@mui/material';
 
 function Footer() {
   return (
-    <Box sx={{ 
+    <Box sx={{
       py: 2,
       textAlign: 'center',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)'
@@ -23,4 +23,4 @@ function Footer() {
   );
 }
 
-export default Footer; 
+export default Footer;

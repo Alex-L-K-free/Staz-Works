@@ -54,7 +54,7 @@ function BookCard({ book = {} }) {
         </Typography>
         <Box sx={{ mt: 'auto', pt: 1 }}>
           <Typography variant="h6" color="primary" gutterBottom>
-            {book.price ? `${book.price} ₽` : 'Цена не указана'}
+            {book.price ? `${book.price} руб.` : 'Цена не указана'}
           </Typography>
           <Button
             variant="contained"

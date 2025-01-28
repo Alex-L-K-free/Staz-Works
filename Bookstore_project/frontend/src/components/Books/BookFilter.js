@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 
 const BookFilter = ({ onFilterChange }) => {
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [priceRange, setPriceRange] = useState([0, 500]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedYears] = useState([]);
 
@@ -59,10 +59,10 @@ const BookFilter = ({ onFilterChange }) => {
           onChange={handlePriceChange}
           valueLabelDisplay="auto"
           min={0}
-          max={5000}
+          max={500}
         />
         <Typography variant="caption">
-          {priceRange[0]} ₽ - {priceRange[1]} ₽
+          {priceRange[0]} руб. - {priceRange[1]} руб.
         </Typography>
       </Box>
 

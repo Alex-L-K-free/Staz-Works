@@ -23,7 +23,8 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar sx={{ minHeight: 'auto', py: 0 }}>
+      {/*<Toolbar>*/}
         <Typography 
           variant="h6" 
           component={Link} 
@@ -34,7 +35,7 @@ function Navbar() {
             color: 'inherit' 
           }}
         >
-          Книжный магазин
+          Bookstore!
         </Typography>
         <Box>
           {isAuthenticated ? (
@@ -44,7 +45,7 @@ function Navbar() {
                 component={Link} 
                 to="/profile"
               >
-                Профиль
+                Личный кабинет
               </Button>
               <Button 
                 color="inherit" 
