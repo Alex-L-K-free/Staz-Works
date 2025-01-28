@@ -1,10 +1,6 @@
-/**
- * Путь: frontend/src/components/Layout/Navbar.js
- * 
- * Назначение: Компонент навигационной панели.
- * Отображает главное меню сайта, логотип
- * и основные элементы навигации.
- */
+// frontend/src/components/Layout/Navbar.js
+// Назначение: Компонент навигационной панели.
+// Отображает главное меню сайта, логотип и основные элементы навигации.
 
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Badge } from '@mui/material';
@@ -25,30 +21,40 @@ function Navbar() {
     //   фиксация и уменьшение navbar
     <>
       <AppBar
-        position="fixed" // Фиксированное позиционирование
+        position="fixed"
         sx={{
-          height: '35px', // Уменьшенная высота
-          zIndex: (theme) => theme.zIndex.drawer + 1 // Гарантирует, что navbar будет поверх остального контента
+          height: '35px', // высота
+          zIndex: (theme) => theme.zIndex.drawer + 1 // navbar зафиксирован
         }}
       >
         <Toolbar
           sx={{
-            minHeight: '35px !important', // Переопределяем минимальную высоту
-            py: 0 // Убираем внутренние отступы
+            minHeight: '35px !important', // минимальная высота
+            py: 0 // внутренние отступы
           }}
         >
           <Typography
             variant="h6"
-            component={Link}
-            to="/"
+            // component={Link} // ссылка по названию ???
+            // to="/"
             sx={{
               flexGrow: 1,
               textDecoration: 'none',
               color: 'inherit',
-              fontSize: '1.1rem' // Немного уменьшаем размер шрифта
+              fontSize: '1.1rem' // размер шрифта
             }}
           >
-            Bookstore!   Главная
+            Bookstore!
+
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/"
+                  sx={{ py: 0.5 }} // отступы кнопок
+                >
+                  Главная
+                </Button>
+
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {isAuthenticated ? (
@@ -57,7 +63,7 @@ function Navbar() {
                   color="inherit"
                   component={Link}
                   to="/profile"
-                  sx={{ py: 0.5 }} // Уменьшаем отступы кнопок
+                  sx={{ py: 0.5 }} // отступы кнопок
                 >
                   Личный кабинет
                 </Button>
@@ -91,7 +97,7 @@ function Navbar() {
             )}
             <IconButton
               color="inherit"
-              size="small" // Уменьшаем размер иконки
+              size="small" // размер иконки
               sx={{ ml: 1 }}
             >
               <Badge badgeContent={0} color="error">
@@ -101,7 +107,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {/* Добавляем пустой элемент для компенсации фиксированного позиционирования */}
+      {/* пустой элемент для фиксированного положения */}
       <Toolbar sx={{ minHeight: '35px !important' }} />
     </>
   );
