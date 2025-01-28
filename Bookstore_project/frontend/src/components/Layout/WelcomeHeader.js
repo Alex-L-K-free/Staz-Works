@@ -1,3 +1,6 @@
+
+// приветственная секция на главной странице
+
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import welcomeBg from '../../assets/images/welcome-bg.jpg'; // Путь к фоновому изображению
