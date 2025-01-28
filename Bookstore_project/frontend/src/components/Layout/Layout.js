@@ -13,35 +13,28 @@ import Footer from './Footer';
 
 function Layout({ children }) {
   return (
-    <Box sx={{ 
-      display: 'flex', 
+    <Box sx={{
+      display: 'flex',
       flexDirection: 'column',
-      minHeight: '100vh' 
+      minHeight: '100vh'
     }}>
-      {/*/!* Фиксируем Navbar *!/*/}
-      {/*<Navbar sx={{*/}
-      {/*  position: 'fixed',*/}
-      {/*  top: 0,*/}
-      {/*  left: 0,*/}
-      {/*  right: 0,*/}
-      {/*  zIndex: 1200, // Убедитесь, что Navbar находится поверх других элементов*/}
-      {/*}} />*/}
-
-      {/*<Box sx={{*/}
-      {/*  flex: 1,*/}
-      {/*  padding: 2,*/}
-      {/*  marginTop: '64px', // Отступ, чтобы контент не накладывался на Navbar (размер Navbar зависит от вашей реализации)*/}
-      {/*}}>*/}
-      {/*  {children}*/}
-      {/*</Box>*/}
       <Navbar />
       <Box sx={{
         flex: 1,
         padding: 2
       }}>
+
+      {/*?пока не работает - нарушает боковые отступы (для фиксации navbar)?*/}
+      {/*<Box sx={{*/}
+      {/*  flex: 1,*/}
+      {/*  padding: 2,*/}
+      {/*  width: '100%',*/}
+      {/*  maxWidth: '1200px', // Ограничиваем максимальную ширину контента*/}
+      {/*  margin: '0 auto', // Центрируем контент*/}
+      {/*}}>*/}
+
         {children}
       </Box>
-
       <Footer />
     </Box>
   );
