@@ -12,5 +12,8 @@ StazProject/
 /.idea/
 /NewStazProject/
 /StazProject/
+staticfiles/
+Bookstore_project/backend/staticfiles/
+/staticfiles
 
 

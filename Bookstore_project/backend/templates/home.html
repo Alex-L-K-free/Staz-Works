@@ -2,16 +2,17 @@
 
 {% block content %}
 <div class="welcome-section">
-    <h1>Добро пожаловать в Bookstore!</h1>
-    <h2>Здесь вы найдете лучшие книги для чтения</h2>
+    <h1>API - Добро пожаловать в Bookstore! - API</h1>
 </div>
 
 <div class="content">
     <div class="api-links">
         <a href="/api/books/" class="api-link">API: Список книг (/api/books/)</a>
+        <a href="/api/users/" class="api-link">API: Список пользователей (/api/users/)</a>
+        <a href="/api/users/profile/" class="api-link">API: Профиль пользователя (/api/users/profile/)</a>
         <a href="/api/users/register/" class="api-link">API: Регистрация (/api/users/register/)</a>
         <a href="/api/users/token/" class="api-link">API: Получение токена (/api/users/token/)</a>
-        <a href="/api/users/profile/" class="api-link">API: Профиль пользователя (/api/users/profile/)</a>
+        <a href="/api/users/token/refresh/" class="api-link">API: Обновление токена (/api/users/token/refresh/)</a>
     </div>
 </div>
 {% endblock %} 
