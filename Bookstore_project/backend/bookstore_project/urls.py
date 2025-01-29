@@ -6,13 +6,13 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from books.views import home_view  # Добавим импорт нового представления
+from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name='home'),  # Главная страница
-    path('api/users/', include('users.urls')),  # Добавляем users urls
     path('api/', include('books.urls')),
+    path('api/users/', include('users.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

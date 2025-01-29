@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore API</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #1976d2;
+            height: 48px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .welcome-section {
+            margin-top: 48px;
+            background-image: url('/static/images/welcome-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .api-links {
+            display: grid;
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .api-link {
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #1976d2;
+            transition: background-color 0.2s;
+        }
+
+        .api-link:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" style="margin-right: auto;">Книжный магазин</a>
+        <a href="/">Главная</a>
+        <a href="/admin/" style="margin-left: 16px;">Admin</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+</body>
+</html> 
