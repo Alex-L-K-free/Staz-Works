@@ -14,14 +14,23 @@
 {#ссылки на API#}
 <div class="content">
     <div class="api-links">
+        {# Реализованные API #}
         <a href="/api/books/" class="api-link">API: Список книг (/api/books/)</a>
-        <a href="/api/books/ " class="api-link">API: *Информация о книге* (/api/books/{+ ввести id книги}/ )</a>
-{#        <a href="/api/books/genres/ " class="api-link">API: *Список жанров* (/api/books/genres/ )</a>#}
+        <a href="/api/books/" class="api-link">API: Информация о книге (/api/books/{вставить id книги}/)</a>
         <a href="/api/users/" class="api-link">API: Список пользователей (/api/users/)</a>
         <a href="/api/users/profile/" class="api-link">API: Профиль пользователя (/api/users/profile/)</a>
         <a href="/api/users/register/" class="api-link">API: Регистрация пользователя (/api/users/register/)</a>
         <a href="/api/users/token/" class="api-link">API: Получение токена (/api/users/token/)</a>
         <a href="/api/users/token/refresh/" class="api-link">API: Обновление токена (/api/users/token/refresh/)</a>
+
+        {# Нереализованные API #}
+        {#<a href="/api/books/search/" class="api-link">API: Поиск книг (/api/books/search/)</a>#}
+        {#<a href="/api/books/filter/" class="api-link">API: Фильтрация книг (/api/books/filter/)</a>#}
+        {#<a href="/api/cart/" class="api-link">API: Корзина пользователя (/api/cart/)</a>#}
+        {#<a href="/api/orders/" class="api-link">API: Заказы пользователя (/api/orders/)</a>#}
+        {#<a href="/api/reviews/" class="api-link">API: Отзывы о книгах (/api/reviews/)</a>#}
+        {#<a href="/api/favorites/" class="api-link">API: Избранные книги (/api/favorites/)</a>#}
+        {#<a href="/api/genres/" class="api-link">API: Список жанров (/api/genres/)</a>#}
     </div>
 </div>
 {% endblock %} 
