@@ -1,10 +1,8 @@
-"""
-Путь: backend/books/serializers.py
+# backend/books/serializers.py
+# Сериализаторы для моделей приложения books.
+# Отвечают за преобразование данных моделей Django
+# в JSON-формат и обратно для API
 
-Назначение: Сериализаторы для моделей приложения books.
-Отвечают за преобразование данных моделей Django
-в JSON-формат и обратно для API.
-"""
 
 from rest_framework import serializers
 from django.contrib.auth import get_user_model

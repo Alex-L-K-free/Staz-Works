@@ -1,12 +1,10 @@
-"""
-Путь: backend/books/views.py
+# backend/books/views.py
+# Представления (views) приложения books.
+# Содержит логику обработки HTTP-запросов,
+# включая получение списка книг, детальной информации,
+# фильтрацию и поиск, управление заказами, с регистрацией вход выход пользователя
 
-Назначение: Представления (views) приложения books.
-Содержит логику обработки HTTP-запросов,
-включая получение списка книг, детальной информации,
-фильтрацию и поиск.
-"""
-
+#Импортируются необходимые модули для создания представлений, фильтрации, аутентификации, сериализации данных и обработки запросов.
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, permission_classes
@@ -20,15 +18,16 @@ from .serializers import BookSerializer, UserSerializer, CartSerializer, CartIte
 from rest_framework.decorators import action
 from rest_framework import generics
 
-# Create your views here.
 
+#ViewSet для работы с книгами (создание, чтение, обновление, удаление)
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'author', 'genre']
-    ordering_fields = ['price', 'year', 'created_at']
+    search_fields = ['title', 'author', 'genre']            #фильтр поиска книг
+    ordering_fields = ['price', 'year', 'created_at']       #фильтр сортировки книг
 
+    #для фильтрации книг по жанру, цене и году выпуска
     def get_queryset(self):
         queryset = Book.objects.all()
         genre = self.request.query_params.get('genre', None)
@@ -55,25 +54,28 @@ class BookViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 # Простое представление для главной страницы
-def home_view(request):
-    return HttpResponse("Добро пожаловать в книжный магазин")
+# def home_view(request):
+#     return HttpResponse("Добро пожаловать в Bookstore!")
 
+#корневой эндпоинт API lkz приветствия
 @api_view(['GET'])
 def api_root(request):
     return Response({
-        'message': 'Добро пожаловать в API книжного магазина'
+        'message': 'Добро пожаловать в API Bookstore!'
     })
 
+#Аутентификация пользователей
 @api_view(['POST'])
-def register_user(request):
+def register_user(request):                         #регистрация нового пользователя
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#Аутентификация пользователей
 @api_view(['POST'])
-def login_user(request):
+def login_user(request):                            #вход пользователя
     username = request.data.get('username')
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
@@ -86,19 +88,22 @@ def login_user(request):
         status=status.HTTP_400_BAD_REQUEST
     )
 
+#Аутентификация пользователей
 @api_view(['POST'])
-def logout_user(request):
+def logout_user(request):                           #выход пользователя
     logout(request)
     return Response({'message': 'Logged out successfully'})
 
+#ViewSet для работы с корзиной
 class CartViewSet(viewsets.ModelViewSet):
     serializer_class = CartSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]         #для доступа зарегистрированных пользователей к корзине
 
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
 
     @action(detail=True, methods=['post'])
+    #для добавления книг в корзину (с количеством)
     def add_item(self, request, pk=None):
         cart = self.get_object()
         book_id = request.data.get('book_id')
@@ -121,6 +126,7 @@ class CartViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
+#ViewSet для работы с заказами пользователя
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -128,7 +134,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
+#BookListView для отображения списка книг
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [AllowAny]  # Разрешаем доступ всем пользователям
+    permission_classes = [AllowAny]  #для всех пользователей

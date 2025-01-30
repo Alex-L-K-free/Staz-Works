@@ -1,14 +1,21 @@
+{#backend/templates/home.html#}
+{#шаблон для главной страницы, отображает приветственное сообщение #}
+{#и предоставляет ссылки на различные API#}
+
+{#базовый шаблон#}
 {% extends 'base.html' %}
 
+{#секция приветствия#}
 {% block content %}
 <div class="welcome-section">
     <h1>API - Добро пожаловать в Bookstore! - API</h1>
 </div>
 
+{#ссылки на API#}
 <div class="content">
     <div class="api-links">
         <a href="/api/books/" class="api-link">API: Список книг (/api/books/)</a>
-        <a href="/api/books/{id}/ " class="api-link">API: *Информация о книге* (/api/books/{id}/ )</a>
+        <a href="/api/books/ " class="api-link">API: *Информация о книге* (/api/books/{+ ввести id книги}/ )</a>
 {#        <a href="/api/books/genres/ " class="api-link">API: *Список жанров* (/api/books/genres/ )</a>#}
         <a href="/api/users/" class="api-link">API: Список пользователей (/api/users/)</a>
         <a href="/api/users/profile/" class="api-link">API: Профиль пользователя (/api/users/profile/)</a>
